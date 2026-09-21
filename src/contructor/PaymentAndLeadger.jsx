@@ -1,22 +1,23 @@
 import React, { useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { OtMoney, siteDashboardData, sites } from "./../assets/contractor";
-import PaySlipModal from "../components/PaySlipModel";
 import PayWage from "./PayWage";
+import PaySlipModal from "../components/PaySlipModel";
 
 const PaymentAndLeadger = () => {
   const { activeSiteId, setIsAuthOpen } = useOutletContext();
 
-  const [generateSlipOpen, setGenerateSlipOpen] = useState(false);
-  const [payWageOpen, setPayWageOpen] = useState(false);
+  const [isPaySlipOpen, setIsPaySlipOpen] = useState(false);
+  const [isPayWageOpen, setIsPayWageOpen] = useState(false);
   const [selectedLabourId, setSelectedLabourId] = useState("");
 
   const currentSite = sites.find((site) => site.id === activeSiteId);
   const currentSiteData = siteDashboardData[activeSiteId];
 
-  const attendanceData = currentSiteData?.attendencePunch || [];
+  // const attendanceData = currentSiteData?.attendencePunch || [];
+  const attendenceData = currentSiteData?.attendencePunch || [];
 
-  const selectedWorker = attendanceData.find(
+  const selectedWorker = attendenceData.find(
     (worker) => worker.laburId === selectedLabourId,
   );
 
@@ -64,7 +65,7 @@ const PaymentAndLeadger = () => {
     return gross - cashAdvanced;
   };
 
-  const paymentHistory = attendanceData
+  const paymentHistory = attendenceData
     .filter((worker) => Number(worker.cashAdvanced) > 0)
     .map((worker, index) => {
       return {
@@ -92,20 +93,38 @@ const PaymentAndLeadger = () => {
 
   const handleViewPaySlip = (labourId) => {
     setSelectedLabourId(labourId);
-    setGenerateSlipOpen(true);
-  };
-
-  const handleClosePaySlip = () => {
-    setGenerateSlipOpen(false);
-    setSelectedLabourId("");
+    setIsPaySlipOpen(true);
   };
 
   //  RECORD NEW WAGE
 
   const handleRecordWage = () => {
-    setPayWageOpen(true);
+    setIsPayWageOpen(true);
   };
 
+  const settlement = {
+    voucherId: selectedWorker
+      ? `VCH-${selectedWorker.laburId}-0926`
+      : "VCH-0000-0926",
+
+    siteName: "Metro Corridor Line 3 (Tower B)",
+
+    contractorName: "Apex Buildcon Infrastructures Ltd",
+
+    payPeriod: "01 Sep 2026 to 08 Sep 2026",
+
+    regularDays: 5.5,
+
+    overtimeHours: 2,
+
+    overtimeRate: selectedWorker
+      ? Number(selectedWorker.dailyWage || 0) / 8
+      : 0,
+
+    priorAdvance: 500,
+
+    settledPayments: 3000,
+  };
   return (
     <>
       <div className="w-full flex flex-col items-center justify-start px-4 sm:px-6 pt-32 lg:pt-16 bg-gray-100 min-h-screen">
@@ -299,18 +318,19 @@ const PaymentAndLeadger = () => {
       {/* PAY WAGE MODAL */}
 
       <PayWage
-        isOpen={payWageOpen}
-        onClose={() => setPayWageOpen(false)}
-        workers={attendanceData}
+        isOpen={isPayWageOpen}
+        onClose={() => setIsPayWageOpen(false)}
+        labourData={attendenceData}
+        selectedLabourId={selectedLabourId}
       />
 
       {/* PAY SLIP MODAL */}
 
       <PaySlipModal
-        isOpen={generateSlipOpen}
-        onClose={handleClosePaySlip}
+        isOpen={isPaySlipOpen}
+        onClose={() => setIsPaySlipOpen(false)}
         worker={selectedWorker}
-        site={currentSite}
+        settlement={settlement}
       />
     </>
   );

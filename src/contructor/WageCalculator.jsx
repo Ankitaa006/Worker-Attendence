@@ -6,7 +6,7 @@ import PaySlipModal from "../components/PaySlipModel";
 const WageCalculator = () => {
   const { activeSiteId } = useOutletContext();
 
-  const [generateSlipOpen, setGenerateSlipOpen] = useState(false);
+  const [isPaySlipOpen, setIsPaySlipOpen] = useState(false);
   const [selectedLabourId, setSelectedLabourId] = useState("");
   const [selectedPeriod, setSelectedPeriod] = useState("month");
 
@@ -86,30 +86,30 @@ const WageCalculator = () => {
     return gross - cashAdvanced;
   };
 
-  const totalGross = attendenceData.reduce(
-    (total, worker) => total + calculateGross(worker),
-    0,
-  );
+  // const totalGross = attendenceData.reduce(
+  //   (total, worker) => total + calculateGross(worker),
+  //   0,
+  // );
 
-  const totalAdvance = attendenceData.reduce(
-    (total, worker) => total + (Number(worker.cashAdvanced) || 0),
-    0,
-  );
+  // const totalAdvance = attendenceData.reduce(
+  //   (total, worker) => total + (Number(worker.cashAdvanced) || 0),
+  //   0,
+  // );
 
-  const totalNetDue = attendenceData.reduce(
-    (total, worker) => total + calculateNetDue(worker),
-    0,
-  );
+  // const totalNetDue = attendenceData.reduce(
+  //   (total, worker) => total + calculateNetDue(worker),
+  //   0,
+  // );
 
-  const totalOtHour = attendenceData.reduce(
-    (total, worker) => total + Number(worker.ot || 0),
-    0,
-  );
+  // const totalOtHour = attendenceData.reduce(
+  //   (total, worker) => total + Number(worker.ot || 0),
+  //   0,
+  // );
 
-  const totalDaysWorked = attendenceData.reduce(
-    (total, worker) => total + Number(worker.daysWork || 0),
-    0,
-  );
+  // const totalDaysWorked = attendenceData.reduce(
+  //   (total, worker) => total + Number(worker.daysWork || 0),
+  //   0,
+  // );
 
   const exportWageSummary = () => {
     if (!attendenceData.length) return;
@@ -146,9 +146,7 @@ const WageCalculator = () => {
     const csvContent = [
       headers.join(","),
       ...rows.map((row) =>
-        row
-          .map((value) => `"${String(value).replace(/"/g, '""')}"`)
-          .join(","),
+        row.map((value) => `"${String(value).replace(/"/g, '""')}"`).join(","),
       ),
     ].join("\n");
 
@@ -174,12 +172,31 @@ const WageCalculator = () => {
 
   const handleViewPaySlip = (labourId) => {
     setSelectedLabourId(labourId);
-    setGenerateSlipOpen(true);
+    setIsPaySlipOpen(true);
   };
 
-  const handleClosePaySlip = () => {
-    setGenerateSlipOpen(false);
-    setSelectedLabourId("");
+  const settlement = {
+    voucherId: selectedWorker
+      ? `VCH-${selectedWorker.laburId}-0926`
+      : "VCH-0000-0926",
+
+    siteName: "Metro Corridor Line 3 (Tower B)",
+
+    contractorName: "Apex Buildcon Infrastructures Ltd",
+
+    payPeriod: "01 Sep 2026 to 08 Sep 2026",
+
+    regularDays: 5.5,
+
+    overtimeHours: 2,
+
+    overtimeRate: selectedWorker
+      ? Number(selectedWorker.dailyWage || 0) / 8
+      : 0,
+
+    priorAdvance: 500,
+
+    settledPayments: 3000,
   };
 
   return (
@@ -194,33 +211,25 @@ const WageCalculator = () => {
             </h1>
 
             <p className="text-sm text-gray-500 mt-1">
-              Auto-computed earnings based on site attendance records,
-              overtime multipliers, and advance deductions.
+              Auto-computed earnings based on site attendance records, overtime
+              multipliers, and advance deductions.
             </p>
-
-            
           </div>
 
           {/* title and attendence */}
           <div className="w-full flex flex-col sm:flex-row items-center lg:justify-between mx-4 lg:mt-4 mb-4 gap-3">
             {/* time */}
             <div className="flex items-center space-x-2 bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200 text-xs">
-              <span className="font-semibold text-slate-600">
-                Period:
-              </span>
+              <span className="font-semibold text-slate-600">Period:</span>
 
               <select
                 value={selectedPeriod}
                 onChange={(event) => setSelectedPeriod(event.target.value)}
                 className="bg-white px-2 py-1 rounded border border-slate-300 text-xs focus:ring-1 focus:ring-amber-500 outline-none font-medium"
               >
-                <option value="month">
-                  {currentMonthLabel}
-                </option>
+                <option value="month">{currentMonthLabel}</option>
 
-                <option value="week">
-                  Current Week ({currentWeekLabel})
-                </option>
+                <option value="week">Current Week ({currentWeekLabel})</option>
               </select>
             </div>
 
@@ -235,8 +244,6 @@ const WageCalculator = () => {
             </button>
           </div>
         </div>
-
-       
 
         {/* Wage Table */}
         {attendenceData.length > 0 ? (
@@ -310,10 +317,7 @@ const WageCalculator = () => {
                         {/* Daily Rate */}
                         <td className="px-5 py-4">
                           <span className="font-semibold text-slate-900">
-                            ₹
-                            {Number(worker.dailyWage).toLocaleString(
-                              "en-IN",
-                            )}
+                            ₹{Number(worker.dailyWage).toLocaleString("en-IN")}
                           </span>
                         </td>
 
@@ -353,9 +357,9 @@ const WageCalculator = () => {
                         <td className="px-5 py-4 text-right">
                           <span className="font-medium text-red-600">
                             -₹
-                            {Number(
-                              worker.cashAdvanced || 0,
-                            ).toLocaleString("en-IN")}
+                            {Number(worker.cashAdvanced || 0).toLocaleString(
+                              "en-IN",
+                            )}
                           </span>
                         </td>
 
@@ -373,9 +377,7 @@ const WageCalculator = () => {
                         <td className="px-5 py-4 text-center">
                           <button
                             type="button"
-                            onClick={() =>
-                              handleViewPaySlip(worker.laburId)
-                            }
+                            onClick={() => handleViewPaySlip(worker.laburId)}
                             className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-md text-xs font-semibold text-slate-800 transition cursor-pointer"
                           >
                             Slip
@@ -385,43 +387,6 @@ const WageCalculator = () => {
                     );
                   })}
                 </tbody>
-
-                {/* Total */}
-                <tfoot>
-                  <tr className="bg-slate-50 border-t-2 border-slate-200">
-                    <td
-                      colSpan="4"
-                      className="px-5 py-4 text-right font-bold text-slate-900"
-                    >
-                      Total
-                    </td>
-
-                    <td className="px-5 py-4 text-right font-bold text-slate-900">
-                      ₹
-                      {totalGross.toLocaleString("en-IN", {
-                        maximumFractionDigits: 2,
-                      })}
-                    </td>
-
-                    <td className="px-5 py-4 text-right font-bold text-red-600">
-                      -₹
-                      {totalAdvance.toLocaleString("en-IN", {
-                        maximumFractionDigits: 2,
-                      })}
-                    </td>
-
-                    <td className="px-5 py-4 text-right font-bold text-red-600">
-                      ₹
-                      {totalNetDue.toLocaleString("en-IN", {
-                        maximumFractionDigits: 2,
-                      })}
-                    </td>
-
-                    <td className="px-5 py-4 text-center text-xs text-slate-500">
-                      {totalOtHour} OT hrs
-                    </td>
-                  </tr>
-                </tfoot>
               </table>
             </div>
           </div>
@@ -447,9 +412,10 @@ const WageCalculator = () => {
       </div>
 
       <PaySlipModal
-        isOpen={generateSlipOpen}
-        onClose={handleClosePaySlip}
+        isOpen={isPaySlipOpen}
+        onClose={() => setIsPaySlipOpen(false)}
         worker={selectedWorker}
+        settlement={settlement}
       />
     </>
   );

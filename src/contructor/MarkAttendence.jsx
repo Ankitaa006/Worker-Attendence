@@ -3,6 +3,7 @@ import { MdOutlineFileDownload } from "react-icons/md";
 import {
   OtMoney,
   siteDashboardData,
+  sites,
   tradeRoleData,
   wageCalculation,
 } from "../assets/contractor";
@@ -17,6 +18,8 @@ const MarkAttendence = () => {
   const [attendenceData, setAttendenceData] = useState([]);
 
   const siteData = siteDashboardData[activeSiteId];
+
+  const currentSite = sites.find((site) => site.id === activeSiteId);
 
   // Check whether the selected site has dashboard data
   const hasSiteData = siteData !== null && siteData !== undefined;
@@ -150,6 +153,92 @@ const MarkAttendence = () => {
     year: "numeric",
   });
 
+  const getOverTimeRate = (category) => {
+    const otData = OtMoney.find((item) => item.role === category);
+
+    return otData ? Number(otData.money) : 0;
+  };
+
+  const calculateGross = (worker) => {
+    const dailyWage = Number(worker.dailyWage) || 0;
+    const daysWorked = Number(worker.daysWork) || 0;
+    const otHours = Number(worker.ot) || 0;
+
+    const otRate = getOverTimeRate(worker.category);
+
+    const regularAmount = dailyWage * daysWorked;
+    const overtimeAmount = otRate * otHours;
+
+    return regularAmount + overtimeAmount;
+  };
+
+  const calculateNetDue = (worker) => {
+    const gross = calculateGross(worker);
+
+    const cashAdvanced = Number(worker.cashAdvanced) || 0;
+
+    return gross - cashAdvanced;
+  };
+
+  const exportWageSummary = () => {
+    if (!attendenceData.length) return;
+
+    const headers = [
+      "Labourer",
+      "Labour ID",
+      "Trade",
+      "Daily Rate",
+      "Days Worked",
+      "OT Hours",
+      "Gross Earned",
+      "Cash Advances",
+      "Net Balance Due",
+    ];
+
+    const rows = attendenceData.map((worker) => {
+      const gross = calculateGross(worker);
+      const netDue = calculateNetDue(worker);
+
+      return [
+        worker.labourer,
+        worker.laburId,
+        worker.category,
+        worker.dailyWage,
+        worker.daysWork,
+        worker.ot,
+        gross.toFixed(2),
+        worker.cashAdvanced,
+        netDue.toFixed(2),
+      ];
+    });
+
+    const csvContent = [
+      headers.join(","),
+      ...rows.map((row) =>
+        row.map((value) => `"${String(value).replace(/"/g, '""')}"`).join(","),
+      ),
+    ].join("\n");
+
+    const blob = new Blob([csvContent], {
+      type: "text/csv;charset=utf-8;",
+    });
+
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = `${currentSite?.title || "site"}-wage-summary.csv`;
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    document.body.removeChild(link);
+
+    URL.revokeObjectURL(url);
+  };
+
   const handleRoleChange = (e) => {
     const selectedRole = e.target.value;
 
@@ -159,7 +248,7 @@ const MarkAttendence = () => {
   return (
     <div className="flex flex-col items-center justify-start px-4 sm:px-6 pt-32 lg:pt-16 bg-gray-100 min-h-screen">
       {/* Attendence Header */}
-      <div className="w-full lg:w-6/7 flex flex-col lg:flex-row my-8 lg:my-10 border mx-10 border-gray-300 rounded-md lg:gap-8">
+      <div className="w-full lg:w-6/7 flex flex-col lg:flex-row my-8 lg:my-10 bg-white border mx-10 border-gray-300 rounded-md lg:gap-8">
         {/* title and description */}
         <div className="w-full m-4">
           <h1 className="text-xl text-black font-bold">
@@ -200,7 +289,12 @@ const MarkAttendence = () => {
           </button>
 
           {/* csv */}
-          <button className="flex px-3 py-2 bg-slate-900 text-white hover:bg-black rounded-lg text-xs font-semibold transition gap-1 cursor-pointer">
+          <button
+            type="button"
+            onClick={exportWageSummary}
+            disabled={!attendenceData.length}
+            className="flex px-3 py-2 bg-slate-900 text-white hover:bg-black rounded-lg text-xs font-semibold transition gap-1 cursor-pointer"
+          >
             <MdOutlineFileDownload size={18} />
             Export CSV
           </button>
@@ -208,7 +302,7 @@ const MarkAttendence = () => {
       </div>
 
       {/* search logic */}
-      <div className="w-full lg:w-6/7 flex flex-col lg:flex-row items-center justify-between mx-4 mb-4 lg:gap-20 gap-6 bg-gray-200/25 border border-gray-300 rounded-md p-0.5">
+      <div className="w-full lg:w-6/7 flex flex-col lg:flex-row items-center justify-between bg-white mx-4 mb-4 lg:gap-20 gap-6 bg-gray-200/25 border border-gray-300 rounded-md p-0.5">
         {/* Search bar and filter */}
         <div className="w-full flex flex-row items-center justify-start gap-2.5 p-3">
           {/* search bar */}

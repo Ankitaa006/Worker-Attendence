@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const WageCalCard = ({
   title,
@@ -12,6 +13,7 @@ const WageCalCard = ({
   colIcon,
   textCal,
 }) => {
+  const navigate = useNavigate();
   return (
     <div className="w-full min-h-[180px] flex flex-row items-start justify-between bg-white border border-slate-200 rounded-xl p-6 gap-4 shadow-sm">
       <div className="flex flex-col items-start justify-center">
@@ -29,9 +31,7 @@ const WageCalCard = ({
           </span>
         )}
 
-        <p className="text-xs text-slate-500 mt-1 font-hindi">
-          {desc}
-        </p>
+        <p className="text-xs text-slate-500 mt-1 font-hindi">{desc}</p>
 
         <p
           className={`mt-3 flex items-center text-xs ${
@@ -46,15 +46,17 @@ const WageCalCard = ({
         <span
           className={`flex items-center justify-center ${
             colBg || "bg-slate-50"
-          } ${
-            colIcon || "text-slate-400"
-          } w-14 h-14 rounded-xl`}
+          } ${colIcon || "text-slate-400"} w-14 h-14 rounded-xl`}
         >
           {icon}
         </span>
 
         {payNow && (
-          <button className="text-red-600 font-semibold hover:underline text-sm cursor-pointer">
+          <button
+            type="button"
+            onClick={() => navigate("/contractor/payment-leadger")}
+            className="text-red-600 font-semibold hover:underline text-sm cursor-pointer"
+          >
             {payNow}
           </button>
         )}
