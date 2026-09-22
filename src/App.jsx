@@ -7,6 +7,11 @@ import LabourDirectory from "./contructor/LabourDirectory";
 import WageCalculator from "./contructor/WageCalculator";
 import PaymentAndLeadger from "./contructor/PaymentAndLeadger";
 import ContractorLayout from "./contructor/ContractorLayout";
+import WorkerLayout from "./workers/WorkerLayout";
+import AttendenceLog from "./workers/AttendenceLog";
+import ReportIsuue from "./workers/ReportIsuue";
+import PaymentReceipts from "./workers/PaymentReceipts";
+import WageSlip from "./workers/WageSlip";
 
 const App = () => {
   return (
@@ -22,6 +27,16 @@ const App = () => {
           <Route path="wage-calculator" element={<WageCalculator />} />
           <Route path="payment-leadger" element={<PaymentAndLeadger />} />
         </Route>
+
+        {/* Worker Route */}
+        <Route path="/worker" element={<WorkerLayout />}>
+          <Route index path="attendence-log" element={<AttendenceLog />}/>
+          <Route index path="wage-slip" element={<WageSlip />}/>
+          <Route index path="payment-receipt" element={<PaymentReceipts />}/>
+          <Route index path="report-issue" element={<ReportIsuue />}/>
+        </Route>
+
+        {/*  */}
       </Routes>
     </div>
   );
