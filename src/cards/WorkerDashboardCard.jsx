@@ -15,21 +15,22 @@ const WorkerDashboardCard = ({
   mainText,
   descText,
   typeBorder,
-  autoTextCol
+  autoTextCol,
+  mainCol
 }) => {
   return (
     <div
-      className={`w-[300x] bg-${mainBG} p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-between`}
+      className={`w-[300x] bg-${mainBG} p-4 sm:p-5 rounded-2xl border border-${mainCol} shadow-sm relative overflow-hidden flex flex-col justify-between`}
     >
       {/* upper */}
       <div className="flex items-center justify-between">
         <h1
-          className={`text-xs font-bold text-${titleBG} uppercase tracking-wider`}
+          className={`text-xs font-bold text-${titleBG}-500 uppercase tracking-wider`}
         >
           {title}
         </h1>
         <span
-          className={`w-8 h-8 rounded-lg bg-${logoBG}-50 text-${logoText}-700 flex items-center justify-center font-bold text-sm`}
+          className={`w-8 h-8 rounded-lg bg-${logoBG} text-${logoText}-700 flex items-center justify-center font-bold text-sm`}
         >
           {logo}
         </span>

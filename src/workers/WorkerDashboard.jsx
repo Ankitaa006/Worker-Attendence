@@ -6,7 +6,7 @@ const WorkerDashboard = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 py-3  flex flex-col items-center justify-between gap-2">
       {/* about section */}
-      <div className="w-full flex flex-row  items-start justify-between bg-slate-900 rounded-xl shadow-xl px-6 pt-6 pb-6 lg:mx-3 my-3.5">
+      <div className="w-full flex flex-row items-start justify-between bg-slate-900 rounded-xl shadow-xl px-6 pt-6 pb-6 lg:mx-3 my-3.5">
         {/* left */}
         <div className="flex flex-row items-center justify-start gap-3 text-white">
           <span className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-amber-400 to-amber-500 text-slate-950 flex items-center justify-center font-black text-2xl shadow-lg border-2 border-amber-300/60">
@@ -87,6 +87,7 @@ const WorkerDashboard = () => {
             descText={worker.descText}
             typeBorder={worker.typeBorder}
             autoTextCol={worker.autoTextCol}
+            mainCol={worker.mainCol}
           />
         ))}
       </div>
