@@ -3,8 +3,7 @@ import { Outlet } from "react-router-dom";
 import WorkerHeader from "../components/WorkerHeader";
 
 import WorkerDashboard from "./WorkerDashboard";
-import Footer from "../contructor/Footer";
-import PageHeader from './PageHeader';
+import PageHeader from "./PageHeader";
 
 const WorkerLayout = () => {
   return (
@@ -14,8 +13,6 @@ const WorkerLayout = () => {
         <WorkerDashboard />
         <PageHeader />
         <Outlet />
-
-        <Footer />
       </div>
     </>
   );

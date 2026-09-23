@@ -72,6 +72,7 @@ const WorkerDashboard = () => {
       <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-4">
         {workerCard.map((worker) => (
           <WorkerDashboardCard
+          key={worker.id}
             title={worker.title}
             logo={worker.logo}
             main={worker.main}
