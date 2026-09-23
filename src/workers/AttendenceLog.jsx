@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AttendenceLog = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [selectedMonth, setSelectedMonth] = useState(8); // September
   const [selectedYear, setSelectedYear] = useState(2026);
 
@@ -194,10 +194,6 @@ const AttendenceLog = () => {
               <h1 className="text-lg font-bold text-slate-900 sm:text-xl">
                 Daily Attendance Punch Record
               </h1>
-
-              <span className="text-sm text-slate-600 sm:text-base">
-                (daily attendance record)
-              </span>
             </div>
 
             <p className="mt-1 text-xs text-slate-500 sm:text-sm">
@@ -373,7 +369,25 @@ const AttendenceLog = () => {
             {/* DISPUTE */}
             <button
               type="button"
-              onClick={() => navigate("/worker/report-issue")}
+              onClick={() => {
+                const disputeDate = new Date(
+                  selectedYear,
+                  selectedMonth,
+                  selectedDay,
+                );
+
+                const formattedDate = [
+                  disputeDate.getFullYear(),
+                  String(disputeDate.getMonth() + 1).padStart(2, "0"),
+                  String(disputeDate.getDate()).padStart(2, "0"),
+                ].join("-");
+
+                navigate("/worker/report-issue", {
+                  state: {
+                    incidentDate: formattedDate,
+                  },
+                });
+              }}
               className="cursor-pointer rounded-lg bg-slate-200 px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-300 sm:px-4 sm:py-2 sm:text-sm"
             >
               Dispute This Day
