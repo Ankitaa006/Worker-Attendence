@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import Dashboard from "./contructor/Dashboard";
 import MarkAttendence from "./contructor/MarkAttendence";
@@ -12,6 +12,11 @@ import AttendenceLog from "./workers/AttendenceLog";
 import ReportIsuue from "./workers/ReportIsuue";
 import PaymentReceipts from "./workers/PaymentReceipts";
 import WageSlip from "./workers/WageSlip";
+import AdminLayout from "./admin/AdminLayout";
+import ComplianceOverview from "./admin/ComplianceOverview";
+import ContraDirectory from "./admin/ContraDirectory";
+import DisputeInbox from "./admin/DisputeInbox";
+import SitesDirectory from "./admin/SitesDirectory";
 
 const App = () => {
   return (
@@ -30,13 +35,25 @@ const App = () => {
 
         {/* Worker Route */}
         <Route path="/worker" element={<WorkerLayout />}>
-          <Route index path="attendence-log" element={<AttendenceLog />}/>
-          <Route index path="wage-slip" element={<WageSlip />}/>
-          <Route index path="payment-receipt" element={<PaymentReceipts />}/>
-          <Route index path="report-issue" element={<ReportIsuue />}/>
+          <Route index path="attendence-log" element={<AttendenceLog />} />
+          <Route path="wage-slip" element={<WageSlip />} />
+          <Route path="payment-receipt" element={<PaymentReceipts />} />
+          <Route path="report-issue" element={<ReportIsuue />} />
         </Route>
 
-        {/*  */}
+        {/* Admin Route */}
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route
+            index
+            path="compliance-overview"
+            element={<ComplianceOverview />}
+          />
+          <Route path="contarctor-overview" element={<ContraDirectory />} />
+          <Route path="dispute-inbox" element={<DisputeInbox />} />
+          <Route path="sites-directory" element={<SitesDirectory />} />
+          <Route />
+        </Route>
+        
       </Routes>
     </div>
   );
