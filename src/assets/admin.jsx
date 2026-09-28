@@ -3,6 +3,8 @@ export const adminLinks = [
   { id: 2, title: "Contract Directory", path: "contarctor-overview" },
   { id: 3, title: "Dispute Inbox", path: "dispute-inbox" },
   { id: 4, title: "Sites Directory", path: "sites-directory" },
+  { id: 5, title: "Funds & 1% BOCW Case", path: "funds-case" },
+  { id: 6, title: "Labour Audit", path: "labour-audit" },
 ];
 
 export const AdmincardData = [
@@ -73,5 +75,55 @@ export const complianceScoreboard = [
     payScore: "82",
     disputeOpen: "0",
     status: "watchlist",
+  },
+];
+
+export const contractorAgencyDetails = [
+  {
+    id: 1,
+    status: "Active",
+    compliance: "96",
+    title: "Apex Buildcon Infrastructures Ltd",
+    contact: "Virendra Oberoi",
+    liscence: "DL-BOCW-2023-8812",
+    phone: "9811204891",
+    site: "Metro Corridor Line 3",
+    workforce: "12",
+  },
+  {
+    id: 2,
+    status: "Active",
+    compliance: "98",
+    title: "Shiv Shakti Construction Works",
+    contact: "Shivkumar Sharma",
+    liscence: "HR-BOCW-2024-4091",
+    phone: "9871145290",
+    site: "Greenfield Heights Phase II",
+    workforce: "0",
+  },
+  {
+    id: 3,
+    status: "Active",
+    compliance: "88",
+    title: "National Roadways Infra Corp",
+    contact: "Baljit Singh Dhillon",
+    liscence: "DL-BOCW-2022-1102",
+    phone: "9920194812",
+    site: "NH-48 Flyover Widening Project",
+    workforce: "0",
+  },
+];
+
+export const grievance = [
+  {
+    id: 1,
+    name: "Ramesh Kumar",
+    disputeTitle: "Overtime Hours Missing",
+    date: "05 Sep 2026",
+    status: "Under Review",
+    disputeDesc:
+      "On Saturday 5th Sep worked 2 hours extra on slab casting till 7 PM, but overtime units were omitted from supervisor register.",
+    caseId: "DISP-401",
+    workpersonId: "SHR-101",
   },
 ];

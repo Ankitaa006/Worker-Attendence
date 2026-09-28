@@ -17,6 +17,8 @@ import ComplianceOverview from "./admin/ComplianceOverview";
 import ContraDirectory from "./admin/ContraDirectory";
 import DisputeInbox from "./admin/DisputeInbox";
 import SitesDirectory from "./admin/SitesDirectory";
+import FundCase from "./admin/FundCase";
+import LabourAudit from "./admin/LabourAudit";
 
 const App = () => {
   return (
@@ -51,6 +53,8 @@ const App = () => {
           <Route path="contarctor-overview" element={<ContraDirectory />} />
           <Route path="dispute-inbox" element={<DisputeInbox />} />
           <Route path="sites-directory" element={<SitesDirectory />} />
+          <Route path="funds-case" element={<FundCase />} />
+          <Route path="labour-audit" element={<LabourAudit />} />
           <Route />
         </Route>
         

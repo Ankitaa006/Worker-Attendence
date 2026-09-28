@@ -15,35 +15,35 @@ const ComplianceOverview = () => {
         </span>
         <br />
         {/* table */}
-        <div className="w-full overflow-x-auto">
+        <div className="w-full overflow-x-auto lg:overflow-x-hidden">
           <table className="w-full min-w-[1100px] border-collapse">
             <thead>
-              <tr className="bg-slate-100">
-                <th className="px-5 py-4 text-left text-sm font-semibold text-slate-900">
+              <tr className="bg-slate-100 text-xs">
+                <th className="px-5 py-4 text-left font-semibold text-slate-900">
                   SITE NAME
                 </th>
 
-                <th className="px-5 py-4 text-left text-sm font-semibold text-slate-900">
+                <th className="px-5 py-4 text-left font-semibold text-slate-900">
                   CONTRACTOR / AGENCY
                 </th>
 
-                <th className="px-5 py-4 text-left text-sm font-semibold text-slate-900">
+                <th className="px-5 py-4 text-left font-semibold text-slate-900">
                   LABOUR FORCE
                 </th>
 
-                <th className="px-5 py-4 text-left text-sm font-semibold text-slate-900">
+                <th className="px-5 py-4 text-left font-semibold text-slate-900">
                   MIN WAGE AUDIT
                 </th>
 
-                <th className="px-5 py-4 text-left text-sm font-semibold text-slate-900">
+                <th className="px-5 py-4 text-left font-semibold text-slate-900">
                   ON-TIME PAYMENT SCORE
                 </th>
 
-                <th className="px-5 py-4 text-left text-sm font-semibold text-slate-900">
+                <th className="px-5 py-4 text-left font-semibold text-slate-900">
                   DISPUTES OPEN
                 </th>
 
-                <th className="px-5 py-4 text-left text-sm font-semibold text-slate-900">
+                <th className="px-5 py-4 text-left  font-semibold text-slate-900">
                   STATUS
                 </th>
               </tr>
@@ -53,32 +53,32 @@ const ComplianceOverview = () => {
               {complianceScoreboard.map((item) => (
                 <tr
                   key={item.id}
-                  className="border-b border-slate-200 last:border-b-0"
+                  className="border-b border-slate-200 last:border-b-0 text-xs"
                 >
                   {/* Site Name */}
                   <td className="px-5 py-5">
-                    <p className="text-sm font-semibold text-slate-900 whitespace-nowrap">
+                    <p className="font-semibold text-slate-900 whitespace-nowrap">
                       {item.siteName}
                     </p>
                   </td>
 
                   {/* Contractor */}
                   <td className="px-5 py-5">
-                    <p className="text-sm text-slate-800 whitespace-nowrap">
+                    <p className="text-slate-800 whitespace-nowrap">
                       {item.contractor}
                     </p>
                   </td>
 
                   {/* Labour Force */}
                   <td className="px-5 py-5">
-                    <p className="text-sm text-slate-800 whitespace-nowrap">
+                    <p className="text-slate-800 whitespace-nowrap">
                       {item.laborForce} Active
                     </p>
                   </td>
 
                   {/* Minimum Wage Audit */}
                   <td className="px-5 py-5">
-                    <p className="text-sm font-semibold text-emerald-600 whitespace-nowrap">
+                    <p className="font-semibold text-emerald-600 whitespace-nowrap">
                       {item.passed}% Passed (Min ₹{item.minWage}/d)
                     </p>
                   </td>
