@@ -127,3 +127,64 @@ export const grievance = [
     workpersonId: "SHR-101",
   },
 ];
+
+const site = [
+  { id: 1, title: "Metro Corridor Line 3 (Tower B)" },
+  { id: 2, title: "Metro Corridor Line 3 (Tower B)" },
+  { id: 3, title: "Metro Corridor Line 3 (Tower B)" },
+];
+
+export const sitesData = [
+  {
+    id: 1,
+    siteId: "site-1",
+    location: "New Delhi",
+    status: "Active",
+    title: "Metro Corridor Line 3 (Tower B)",
+    agency: "Apex Buildcon Infrastructures Ltd",
+    fund: 650000,
+    minWage: 550,
+    labourWorkforce: 7,
+    totalWorker: 35,
+  },
+  {
+    id: 2,
+    siteId: "site-2",
+    location: "Gurugram, HR",
+    status: "Active",
+    title: "Greenfield Heights Phase II",
+    agency: "Shiv Shakti Construction Works",
+    fund: 500000,
+    minWage: 520,
+    labourWorkforce: 2,
+    totalWorker: 40,
+  },
+  {
+    id: 3,
+    siteId: "site-3",
+    location: "Manesar, HR",
+    status: "Active",
+    title: "NH-48 Flyover Widening Project",
+    agency: "National Roadways Infra Corp",
+    fund: 300000,
+    minWage: 550,
+    labourWorkforce: 1,
+    totalWorker: 25,
+  },
+];
+
+export const projectCategoryData = [
+  { id: 1, title: "Metro Transit Corridor" },
+  { id: 2, title: "Highway and Flyover" },
+  { id: 3, title: "Residential Highrise" },
+  { id: 4, title: "Commercial Infrastructure" },
+  { id: 5, title: "Industrial Plant" },
+];
+
+export const assignedLeadContractor = [
+  { id: 1, title: "Apex Building Infrastructures Ltd (Virendra Obroi)" },
+  { id: 2, title: "Shiv Shakti Construction Work (Shivkumar Santra)" },
+  { id: 3, title: "National Greenway Infra Crop (Baljit Sing Dilha)" },
+];
+
+

@@ -5,9 +5,11 @@ import AdminMain from "./AdminMain";
 import AdminDetailsCard from "../cards/AdminDetailsCard";
 import AdminCards from "./AdminCards";
 import ContructorRegistry from "./contructorRegistry";
+import SiteRegistry from "./SiteRegistry";
 
 const AdminLayout = () => {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [isSiteOpen, setIsSiteOpen] = useState(false);
   return (
     <>
       <div className="bg-gray-50">
@@ -15,14 +17,15 @@ const AdminLayout = () => {
         <AdminMain />
         <AdminCards />
 
-        <Outlet  context={{ setIsAuthOpen }}/>
+        <Outlet context={{ setIsAuthOpen,setIsSiteOpen }} />
       </div>
 
       <ContructorRegistry
         isOpen={isAuthOpen}
-        onClose={() => setIsAuthOpen(false)}
+        onClose={() => setIsSiteOpen(false)}
       />
 
+      <SiteRegistry isOpen={isSiteOpen} onClose={() => setIsSiteOpen(false)} />
     </>
   );
 };
