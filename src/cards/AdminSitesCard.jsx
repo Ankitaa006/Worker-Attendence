@@ -72,7 +72,7 @@ const AdminSitesCard = ({
         {/* Buttons */}
         <div className="flex flex-row items-center justify-end gap-2">
           <button className="text-xs text-white font-bold px-2.5 py-1.5 bg-black rounded-lg hover:bg-gray-800 transition-colors cursor-pointer">
-            Impersonate / View
+            Copy Login
           </button>
 
           <button

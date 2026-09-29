@@ -309,3 +309,17 @@ export const workforceRegistryData = [
     status: "Wage Compliant",
   },
 ];
+
+export const projectFundData = [
+  {
+    id: 1,
+    vouchNo: "VHC-901",
+    disBursalDate: "2026-09-06 17:30",
+    siteLocation: "Metro Corridor Line 3 (Tower B)",
+    agency:"Apex Buildcon Infrastructures Ltd",
+    workerBeneficiary: "Apex Buildcon Infrastructures Ltd",
+    wageDistribution: 3000,
+    bocw: 30,
+    settlement: "Cash with Signed Voucher",
+  },
+];
