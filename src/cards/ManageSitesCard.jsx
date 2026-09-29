@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const ManageSitesCard = ({
   siteId,
@@ -12,6 +12,7 @@ const ManageSitesCard = ({
   labourWorkforce,
   totalWorker,
 }) => {
+  const navigate = useNavigate();
   return (
     <div className="w-full flex flex-col items-start justify-center bg-white border border-gray-300 shadow-xl rounded-lg overflow-hidden">
       {/* Header */}
@@ -72,7 +73,16 @@ const ManageSitesCard = ({
 
         {/* Buttons */}
         <div className="flex flex-row items-center justify-end gap-2">
-          <NavLink className={"text-xs text-blue-700 font-bold"}>
+          <NavLink
+            onClick={() =>
+              navigate("/admin/labour-audit", {
+                state: {
+                  siteName: title,
+                },
+              })
+            }
+            className={"text-xs text-blue-700 font-bold"}
+          >
             <h1 className="text-xs font-semibold text-center leading-tight hover:underline">
               View Site Workers →
             </h1>

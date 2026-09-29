@@ -44,7 +44,7 @@ const SiteRegistry = ({ isOpen, onClose }) => {
       onClick={onClose}
     >
       <div
-        className="relative my-auto w-full max-w-[535px] max-h-[515px] overflow-hidden rounded-[20px] border border-white/80 bg-white px-6 py-4"
+        className="relative my-auto w-full max-w-[455px] max-h-[515px] overflow-hidden rounded-[20px] border border-white/80 bg-white px-6 py-4"
         onClick={(event) => event.stopPropagation()}
       >
         <button
