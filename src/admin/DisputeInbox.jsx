@@ -7,9 +7,17 @@ const DisputeInbox = () => {
   const handleResolve = (id) => {
     setGrievances((prev) =>
       prev.map((item) =>
-        item.id === id ? { ...item, status: "Resolved" } : item,
+        item.id === id
+          ? {
+              ...item,
+              
+              status: "Resolved",
+            }
+          : item,
       ),
+      alert("The Dispute is resolved successfully!"),
     );
+    
   };
 
   const unresolvedGrievances = grievances.filter(

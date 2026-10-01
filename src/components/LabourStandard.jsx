@@ -14,7 +14,7 @@ const LabourStandard = () => {
   return (
     <main className="w-full flex flex-col items-center justify-start">
       {/* first about section */}
-      <div className="w-full lg:w-3/5 bg-slate-50 border rounded-md border-gray-100 mx-2.5 my-6 px-12 py-12 space-y-8">
+      <div className="w-full lg:w-3/5 bg-slate-50 border rounded-md border-gray-100 mx-2.5 my-6 px-12 py-12 space-y-8 mt-28">
         {/* guidline */}
         <div className="w-fit flex flex-row items-center gap-1.5 bg-slate-200 border border-gray-600/15 rounded-full px-3.5 py-1.5">
           <FaCircle size={9} color="green" />

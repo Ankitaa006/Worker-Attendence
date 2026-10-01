@@ -17,12 +17,12 @@ const AdminLayout = () => {
         <AdminMain />
         <AdminCards />
 
-        <Outlet context={{ setIsAuthOpen,setIsSiteOpen }} />
+        <Outlet context={{ setIsAuthOpen, setIsSiteOpen }} />
       </div>
 
       <ContructorRegistry
         isOpen={isAuthOpen}
-        onClose={() => setIsSiteOpen(false)}
+        onClose={() => setIsAuthOpen(false)}
       />
 
       <SiteRegistry isOpen={isSiteOpen} onClose={() => setIsSiteOpen(false)} />

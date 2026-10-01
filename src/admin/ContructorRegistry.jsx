@@ -34,6 +34,9 @@ const ContructorRegistry = ({ isOpen, onClose }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    alert(
+      "The Contarctor Agency is Registerd succesfully, You can copy the login details from the contarctor site. Thankyou!",
+    );
     // Add your save logic here
   };
 
@@ -133,7 +136,6 @@ const ContructorRegistry = ({ isOpen, onClose }) => {
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 placeholder="e.g, random@frustrator.com"
-                
                 className="h-8 w-full rounded-md border border-slate-300 bg-slate-50 px-4 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-orange-500 focus:bg-white focus:ring-4 focus:ring-orange-50"
               />
             </div>
@@ -178,9 +180,9 @@ const ContructorRegistry = ({ isOpen, onClose }) => {
 
           <div className="w-full bg-amber-100 border border-orange-300 rounded-lg p-2">
             <p className="text-xs text-orange-400">
-              <strong>Note: </strong>Onboarding this contractor generates initial
-              contractor portal credentials and binds their agency to statutory
-              BOCW monthly inspections.
+              <strong>Note: </strong>Onboarding this contractor generates
+              initial contractor portal credentials and binds their agency to
+              statutory BOCW monthly inspections.
             </p>
           </div>
 

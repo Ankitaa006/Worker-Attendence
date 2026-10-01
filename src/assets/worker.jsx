@@ -4,7 +4,7 @@ export const workerCard = [
     title: "Attendance",
     logo: "📅",
     main: "7.5 Days",
-    desc: "7 पूरे दिन + 1 आधा दिन",
+    desc: "7 full days + 1 half day",
     type: "Current Month",
     autoText: "Sep 2026",
     mainBG: "white",

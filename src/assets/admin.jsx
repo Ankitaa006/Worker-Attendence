@@ -89,7 +89,10 @@ export const contractorAgencyDetails = [
     phone: "9811204891",
     site: "Metro Corridor Line 3",
     workforce: "12",
+    userId: "apexbuildcon",
+    password: "Apex@1234",
   },
+
   {
     id: 2,
     status: "Active",
@@ -100,7 +103,10 @@ export const contractorAgencyDetails = [
     phone: "9871145290",
     site: "Greenfield Heights Phase II",
     workforce: "0",
+    userId: "shivshakti",
+    password: "Shiv@1234",
   },
+
   {
     id: 3,
     status: "Active",
@@ -111,6 +117,8 @@ export const contractorAgencyDetails = [
     phone: "9920194812",
     site: "NH-48 Flyover Widening Project",
     workforce: "0",
+    userId: "nationalroadways",
+    password: "National@1234",
   },
 ];
 

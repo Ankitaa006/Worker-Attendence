@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { roles } from "../assets/workforceManagement";
+import { useNavigate } from "react-router-dom";
 
 const PortalAuthModel = ({ isOpen, onClose }) => {
+  const navigate = useNavigate();
   const [role, setRole] = useState("admin");
   const [authMode, setAuthMode] = useState("signin");
 
@@ -39,6 +41,11 @@ const PortalAuthModel = ({ isOpen, onClose }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    role === "admin"
+      ? navigate("/admin/compliance-overview")
+      : role === "contractor"
+        ? navigate("/contractor/dashboard")
+        : navigate("/worker/attendence-log");
   };
 
   return (
@@ -270,11 +277,11 @@ const PortalAuthModel = ({ isOpen, onClose }) => {
                 />
               </div>
               <button
-                  type="submit"
-                  className="w-full py-3 bg-blue-500 hover:bg-blue-700 text-white font-semibold rounded-xl transition shadow text-sm mt-4 cursor-pointer"
-                >
-                  Register and Create Admin Org
-                </button>
+                type="submit"
+                className="w-full py-3 bg-blue-500 hover:bg-blue-700 text-white font-semibold rounded-xl transition shadow text-sm mt-4 cursor-pointer"
+              >
+                Register and Create Admin Org
+              </button>
             </>
           )}
         </form>

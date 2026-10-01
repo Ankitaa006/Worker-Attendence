@@ -14,10 +14,32 @@ const ContraDirectory = () => {
           ? {
               ...contractor,
               status: contractor.status === "Active" ? "Suspended" : "Active",
+              alert:
+                contractor.status === "Active"
+                  ? alert("The Contractor is Suspended")
+                  : alert("The Contractor is Activated"),
             }
           : contractor,
       ),
     );
+  };
+
+  const handleCopyLogin = async (id) => {
+    const contractor = contractorAgencyDetails.find((item) => item.id === id);
+
+    if (!contractor) return;
+
+    const loginContent = `User ID: ${contractor.userId}
+    Password: ${contractor.password}`;
+    console.log(loginContent);
+
+    try {
+      await navigator.clipboard.writeText(loginContent);
+
+      alert("Login credentials copied successfully!");
+    } catch (error) {
+      console.error("Failed to copy login credentials:", error);
+    }
   };
 
   return (
@@ -63,6 +85,7 @@ const ContraDirectory = () => {
               site={con.site}
               workforce={con.workforce}
               onSuspend={() => manageSuspend(con.id)}
+              handleCopyLogin={() => handleCopyLogin(con.id)}
             />
           ))}
         </div>

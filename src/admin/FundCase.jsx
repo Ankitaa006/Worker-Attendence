@@ -95,10 +95,10 @@ const FundCase = () => {
                         {data.workerBeneficiary}
                       </td>
                       <td className="py-2.5 px-3 font-bold text-slate-900">
-                        {data.wageDistribution}
+                        ₹{data.wageDistribution}
                       </td>
                       <td className="py-2.5 px-3 text-slate-500">
-                        {data.bocw}
+                        ₹{data.bocw}
                       </td>
                       <td className="py-2.5 px-3 text-center">
                         <span className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-gray-50 text-gray-700">
