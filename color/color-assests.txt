@@ -1,0 +1,63 @@
+{
+  "$schema": "https://tokens.studio/schemas/token-engine.json",
+  "name": "ShramikSetu Design System Tokens",
+  "version": "1.0.0",
+  "color": {
+    "brand": {
+      "primary": {
+        "50": { "value": "#eff6ff", "type": "color", "description": "Subtle tint for backgrounds and active pill highlights" },
+        "100": { "value": "#dbeafe", "type": "color" },
+        "200": { "value": "#bfdbfe", "type": "color" },
+        "300": { "value": "#93c5fd", "type": "color" },
+        "600": { "value": "#2563eb", "type": "color", "description": "Interactive buttons, links, active tab borders" },
+        "700": { "value": "#1d4ed8", "type": "color", "description": "Primary button hover state" },
+        "800": { "value": "#1e40af", "type": "color", "description": "Corporate institutional headers" },
+        "900": { "value": "#1e3a8a", "type": "color", "description": "Deep statutory navy branding" }
+      },
+      "secondary": {
+        "50": { "value": "#fff7ed", "type": "color" },
+        "500": { "value": "#f97316", "type": "color", "description": "Construction safety orange / accent" },
+        "600": { "value": "#ea580c", "type": "color", "description": "BOCW Safety Board highlight badges" },
+        "700": { "value": "#c2410c", "type": "color" }
+      }
+    },
+    "neutral": {
+      "surface": { "value": "#f8fafc", "type": "color", "description": "Application canvas background (slate-50)" },
+      "card": { "value": "#ffffff", "type": "color", "description": "Pure white card & modal surface" },
+      "border": { "value": "#e2e8f0", "type": "color", "description": "Default structural border (slate-200)" },
+      "borderSubtle": { "value": "#f1f5f9", "type": "color", "description": "Table row dividers (slate-100)" },
+      "text": {
+        "primary": { "value": "#0f172a", "type": "color", "description": "Headings and prominent figures (slate-900)" },
+        "body": { "value": "#334155", "type": "color", "description": "Default readable prose (slate-700)" },
+        "muted": { "value": "#64748b", "type": "color", "description": "Labels, captions, helper text (slate-500)" },
+        "faint": { "value": "#94a3b8", "type": "color", "description": "Placeholder inputs and disabled states (slate-400)" }
+      }
+    },
+    "status": {
+      "success": {
+        "bg": { "value": "#f0fdf4", "type": "color", "description": "Green-50 background for Present (1.0) status" },
+        "border": { "value": "#bbf7d0", "type": "color" },
+        "text": { "value": "#15803d", "type": "color", "description": "Green-700 text badge for verified status" },
+        "accent": { "value": "#16a34a", "type": "color", "description": "Green-600 indicator dots and active switches" }
+      },
+      "warning": {
+        "bg": { "value": "#fefce8", "type": "color", "description": "Yellow-50 background for Half-day (0.5) status" },
+        "border": { "value": "#fef08a", "type": "color" },
+        "text": { "value": "#a16207", "type": "color", "description": "Yellow-700 text badge for partial shifts" },
+        "accent": { "value": "#ca8a04", "type": "color" }
+      },
+      "danger": {
+        "bg": { "value": "#fef2f2", "type": "color", "description": "Red-50 background for Absent (0.0) status" },
+        "border": { "value": "#fecaca", "type": "color" },
+        "text": { "value": "#b91c1c", "type": "color", "description": "Red-700 text badge for missed days/disputes" },
+        "accent": { "value": "#dc2626", "type": "color" }
+      },
+      "info": {
+        "bg": { "value": "#f0f9ff", "type": "color", "description": "Sky-50 background for OT (+Overtime) hours" },
+        "border": { "value": "#bae6fd", "type": "color" },
+        "text": { "value": "#0369a1", "type": "color", "description": "Sky-700 text for overtime compensation" },
+        "accent": { "value": "#0284c7", "type": "color" }
+      }
+    }
+  }
+}

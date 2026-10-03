@@ -1,0 +1,241 @@
+#Schema Designe
+-------------------------Admin------------------------------
+Sign In :                             SignUp:
+---------			      -------
+OfficialMail/: String        OrganizationName: String
+AdminPassword: String	     ContactName: String
+			     officialMail: String
+			     password: String
+			     timestamp: date
+
+
+
+---------------------Contractor-------------------------------
+firmName: String
+contactPerson: String
+PhoneNumber: Number
+email: String
+Liscence: String
+AssingSite:
+moongoose.model.Site ( get the site id from the moongoose model , it fetch the site id to th econtractor schema, rather than caling directly the name, it create a relation between them , where the site id will work as a foreign key.)
+
+compliance : Number ( Compliance calculation: (0.35 x Swage) + (0.25 x Scess) + (0.25 x Spayout) + (0.15 x Sdisp) , this involves calculation of Wage Floor(Swage) , BOCW Cess (Scess) , Disbursal Timeliness(Spayout), Grievance(Sdisp)
+
+LoginId: String (LisecnceId(0,4)+Math.random(0,2)+adddhar(-4,-1)) => auto generated from the input data (Encapsulation standard)
+
+Password: String (Name(0:4)+Liscence(4:6)+Math.random(0,4)+Phone(-4,-1)) => auto generated (encapculation standard)
+
+Timestamps: date (create the date of creation and manipulation)
+
+
+--------------------Worker-------------------------------------------
+name: String
+role: moongose.model.Role (Auto fetch from the Skilled table ,The role is used as a foreign key to create a relation )
+dailywage: Number
+mobileNumber: Number
+aadharNo: number
+assingSite: mongoose.model.Sites ( auto fetch from the assign side key )
+workerId: String (Generated using the worker registration in the contractor role)
+accessPin: Number (same as the worker id)
+creqtedAt: Date
+deletedAt: Date
+
+
+----------------------------New Contractor Site Registration-----------------------
+
+project: String
+city: String
+category: mongoose.model.ProjectCategory (Use as a foreing key to connect the project category database
+totalFund: Number
+minWage: Number
+workforceCapacity: Number
+assignedContractor: mongoose.model.Contractor (Use as a foreign key to make connection with the contractor database)
+createdAt: Date
+complete: Boolean( if the site is completed the value is true and if the value is pending show the false)
+deletedAt: Date
+
+---------------------------------signUp--------------------------------------------
+signup{
+needData( data according to schema)
+navigate to the login
+}
+
+---------------------------------login controller-----------------------------------
+login{
+ needData(login details according to scema)
+overall data 
+authentication
+}
+
+onClickLoginButton:{
+navigate to the specif login roles [ admin, contractor, worker]}
+
+---------------------Admin Controller---------------------------------
+protectedRoute(admin all controlers)*
+
+AdminHeader{
+disputeInbox: (send the toal active dispute number)
+}
+
+AdminLayout
+monitor constructor site: filter the  all actives sites by there id,  if the status is active then do site ++ and then show the data
+totalEnrolledData: find the overall worker data by there worker id,  calculate the total active site data,
+BOCW: ($$\text{BOCW Cess} = 0.01 \times \sum E_{\text{gross}}$$) calculate the bcow value from the database details using the  calculation)
+ActiveGrivances: Calculate the total grienvence from the worker site
+
+
+
+
+ComplianceOverview{
+need Data(SiteName, contractor, agency, labourForce, minwageaudit, onTimePaymentScore, disputeOpen, status)
+}
+
+ContractDirectory{
+addNewContractor: New Contructor using the contractor schema
+contractors: need data(status, contactorName, contact, compliance, liscence/registration, phone, activeSite, activeWorker,)
+copyLogin: save the login details as per the scema ,
+suspend: suspend the contractor in the database
+}
+
+DisputeBox{
+disputeData: need data( name, title, details, date, status, caseId, workpersonId )
+markAsResoleved: mark resoved and send the notification to the worker and save in th edatabase and resolved
+}
+
+SiteDirectory {
+RegistryNewSite: register new site logic using the mongoose schema, 
+SiteDetailsController: need data (siteLocation, SiteName, AssingedAgency, Status, totalProjectFund, StatutaryMinWage, LabourWorkforce, id,)
+}
+
+BOCWCAse{
+projectFundDisbursment: voucharNo, disbursalDate, siteLocation, contractorAgency, workerBEneficary, wageDisbursed, cessAccured, SettlementMode
+ExportCessLEadger: export the current data into csv
+}
+
+LabourAudit{
+workforceRegistry: need data( workerUid, name, role, site, contractorAgency, dailyWage, siteFloorWage, stauatoryComplance)
+
+}
+
+
+
+
+--------------------------------Contractor Controller-------------------------------
+contarctorLAyout{
+presentSite: see the details of worer presnrt today
+todaysWage: calculate the total wage according to worker attendance
+totalPendingDues: calculate using the total attedence of worker and total paid 
+disbursedthisMonth: Calculate the total paymet to worker todays
+}
+
+todaysAttendence{
+show the total worker and there attendance : nedd data(labourName, category/role, dailyWage, status[prent, absent], )
+toggle:if toggle is used update the status 
+addNweWorker: add new contractoe using worker schema, 
+pendingWageuery: show the total dispute
+}
+
+markAttendence{
+workerAttedneceTable: show the total worker on this project: need data(labouredName, role, dailywage, attendenceStatus(save the status immediately after choose) overtime(add total overtimrhoue) todaysWage(calculate using the attendance status and overtime, statusAudit: send the colour code, ))
+}
+
+labourAudi{
+registerNewWorker: add the worker logic
+showLabour: show the worker details need data(name, userid, dailywage, role, mobile, aadhar: last four digit, )
+}
+
+wageCalculator{
+show the details of the days worker details need data(name, role, id, wageRate, daysWorked[total worked this month] overtime[total overtime hour this month], grossEarned[total earn calculate using the hourworked and overtime] cahAdvanced[total cashadvanced given], netBalace[calculate using grossearned and cash advance] )
+
+slip: add all the above detials in the slip
+}
+
+PaymentAndLEadger{
+  recordNEwWAge: add the new wage according to the schema
+disbursedHistory: show the details of disbursment need data( vouchar, date and time, name, paymentMode,ammount, refenceReceipt)
+print-slip: show all the details off disbursmentHistory
+}
+
+------------------------------------Worker Controller--------------------------------
+workerPAge{
+ workerDetails: need data(name, name, role, id, aadhar: last four digit, phone, assing project, wageRate,)
+}
+
+workerLAyout{
+attendence: send total attendence : reset after 1 month and save the previous attendance in database 
+overtime: calculate the total attendence
+totalEarned: send the total earmed calculating using attendence overtime and daily wage
+netbalnacedue: calculate using total earned , paid, advance and due
+attendenceView: show the attendence data as the users choice in the filter section , default will be the current month data
+selectedPunchDetails: date, status, overtime, earned,: show the details of the selected date in the attendence table
+}
+
+wageSlip{
+show the current month payment: need data( projectName, contractorName, workerName, role, wageRAte, aadhar:last 4 digits, describe: [regularDays(units/houe, uni rate, ammount: calculate usign the details,)])
+overtimr: hourunit, unit rate, ammount: calculate using details,
+grossTotalWage: calcuate usign overall details
+lesPriorCAshAdvance: see the database and calculate 
+less already paid: show the previously pay money
+netPaybale: calculate usign all of the above details
+}
+
+
+paymentRecipt: {
+paymentSettalment: (
+showThe total disburese ammount for this monthe: need data(vouchar, dateandtime, paymentMode, ammount received, supervisorReciept, status)
+)
+}
+
+ReportIssue: {
+raiseAttendence: need data(issueCategory, dateof incodent, details)
+activeTicket: chchk any previous dispute: need data: total previous dipute data
+}
+---------------------------------signup------------------------------------------
+api:/signup
+
+----------------------------------login router-------------------------------------
+api: /login
+
+---------------------------------Admin Router----------------------------------
+protected*[
+
+api:<Route path="/admin" element={<AdminLayout />}>
+          <Route
+            index
+            path="compliance-overview"
+            element={<ComplianceOverview />}
+          />
+          <Route path="contarctor-overview" element={<ContraDirectory />} />
+          <Route path="dispute-inbox" element={<DisputeInbox />} />
+          <Route path="sites-directory" element={<SitesDirectory />} />
+          <Route path="funds-case" element={<FundCase />} />
+          <Route path="labour-audit" element={<LabourAudit />} />
+          <Route />
+        </Route>
+
+]
+
+---------------------------------Contractor Router----------------------------------
+protected*[
+ <Route path="/contractor" element={<ContractorLayout />}>
+          <Route index path="dashboard" element={<Dashboard />} />
+          <Route path="mark-attendence" element={<MarkAttendence />} />
+          <Route path="labour-directory" element={<LabourDirectory />} />
+          <Route path="wage-calculator" element={<WageCalculator />} />
+          <Route path="payment-leadger" element={<PaymentAndLeadger />} />
+        </Route>
+
+]
+
+
+---------------------------------worker Router----------------------------------
+protected*[
+ <Route path="/worker" element={<WorkerLayout />}>
+          <Route index path="attendence-log" element={<AttendenceLog />} />
+          <Route path="wage-slip" element={<WageSlip />} />
+          <Route path="payment-receipt" element={<PaymentReceipts />} />
+          <Route path="report-issue" element={<ReportIsuue />} />
+        </Route>
+]
+ 
+	

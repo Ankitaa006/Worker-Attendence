@@ -1,0 +1,37 @@
+import re
+import pandas as pd
+import spacy
+
+# 1. Load the spaCy English NLP model
+# Make sure to run `python -m spacy download en_core_web_sm` if not already installed
+nlp = spacy.load("en_core_web_sm")
+
+# Input logs
+logs = [
+    "2026-10-01 10:15:22 FIREWALL BLOCK TCP 192.168.1.25:443 -> 10.0.0.10:22",
+    "2026-10-01 10:16:10 FIREWALL ALLOW UDP 192.168.1.50:53 -> 10.0.0.20:53",
+    "2026-10-01 10:17:45 IDS ALERT Port Scan detected from 172.16.0.25",
+    "2026-10-01 10:18:12 IDS ALERT Brute Force attack from 192.168.1.100:22",
+    "2026-10-01 10:19:30 SYSTEM Login failed for user admin from 10.0.0.15",
+    "2026-10-01 10:20:05 SYSTEM Successful login for user john from 192.168.1.40",
+    "2026-10-01 10:21:15 IDS ALERT DDoS attack detected from 192.168.10.15",
+    "2026-10-01 10:22:40 FIREWALL BLOCK TCP 10.10.10.5:80 -> 192.168.1.20:8080",
+    "2026-10-01 10:23:55 IDS ALERT SQL Injection attempt from 172.16.1.45",
+    "2026-10-01 10:25:10 SYSTEM SSH authentication failed for user root",
+]
+
+# Suspicious/security keywords for scoring and risk assessment
+SUSPICIOUS_KEYWORDS = {
+    "block",
+    "alert",
+    "scan",
+    "brute",
+    "force",
+    "failed",
+    "attack",
+    "ddos",
+    "injection",
+    "sql",
+}
+
+

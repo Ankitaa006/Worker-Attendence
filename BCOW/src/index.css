@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand Primary */
+  --color-brand-primary-50: #eff6ff;
+  --color-brand-primary-100: #dbeafe;
+  --color-brand-primary-200: #bfdbfe;
+  --color-brand-primary-300: #93c5fd;
+  --color-brand-primary-600: #2563eb;
+  --color-brand-primary-700: #1d4ed8;
+  --color-brand-primary-800: #1e40af;
+  --color-brand-primary-900: #1e3a8a;
+
+  /* Brand Secondary */
+  --color-brand-secondary-50: #fff7ed;
+  --color-brand-secondary-500: #f97316;
+  --color-brand-secondary-600: #ea580c;
+  --color-brand-secondary-700: #c2410c;
+
+  /* Neutral */
+  --color-neutral-surface: #f8fafc;
+  --color-neutral-card: #ffffff;
+  --color-neutral-border: #e2e8f0;
+  --color-neutral-border-subtle: #f1f5f9;
+  --color-neutral-text-primary: #0f172a;
+  --color-neutral-text-body: #334155;
+  --color-neutral-text-muted: #64748b;
+  --color-neutral-text-faint: #94a3b8;
+
+  /* Status - Success */
+  --color-status-success-bg: #f0fdf4;
+  --color-status-success-border: #bbf7d0;
+  --color-status-success-text: #15803d;
+  --color-status-success-accent: #16a34a;
+
+  /* Status - Warning */
+  --color-status-warning-bg: #fefce8;
+  --color-status-warning-border: #fef08a;
+  --color-status-warning-text: #a16207;
+  --color-status-warning-accent: #ca8a04;
+
+  /* Status - Danger */
+  --color-status-danger-bg: #fef2f2;
+  --color-status-danger-border: #fecaca;
+  --color-status-danger-text: #b91c1c;
+  --color-status-danger-accent: #dc2626;
+
+  /* Status - Info */
+  --color-status-info-bg: #f0f9ff;
+  --color-status-info-border: #bae6fd;
+  --color-status-info-text: #0369a1;
+  --color-status-info-accent: #0284c7;
+
+
+  /* Text Color */
+  --color-status-text1-small: #94A3B8
+}
+
